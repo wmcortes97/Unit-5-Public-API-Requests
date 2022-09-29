@@ -9,6 +9,8 @@
 let profileURL = "https://randomuser.me/api/";
 let gallery = document.querySelector(".gallery");
 let body = document.querySelector("body");
+let modalContainer = document.createElement("div");
+modalContainer.className = "modal-container";
 
 function getDetails(data) {
   let newCard = document.createElement("div");
@@ -33,16 +35,16 @@ function getDetails(data) {
 }
 
 function modalWindow(data) {
-  let modalContainer = document.createElement("div");
-  modalContainer.className = "modal-container";
+  let modal = document.createElement("div");
+  modal.className = ".modal";
 
   html = `   <div class="modal">
   <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
   <div class="modal-info-container">
       <img class="modal-img" src="${data.picture.large}" alt="profile picture">
-      <h3 id="name" class="modal-name cap">name</h3>
-      <p class="modal-text">email</p>
-      <p class="modal-text cap">city</p>
+      <h3 id="name" class="modal-name cap">${data.name.first} ${data.name.last}</h3>
+      <p class="modal-text">${data.email}</p>
+      <p class="modal-text cap">${data.location.city}</p>
       <hr>
       <p class="modal-text">(555) 555-5555</p>
       <p class="modal-text">123 Portland Ave., Portland, OR 97204</p>
@@ -50,10 +52,11 @@ function modalWindow(data) {
   </div>
 </div>`;
 
-  let card = modalContainer.insertAdjacentHTML("beforeend", html);
-  modalContainer.style.display = "none";
+  modal.insertAdjacentHTML("beforeend", html);
 
+  modalContainer.appendChild(modal);
   body.appendChild(modalContainer);
+  modalContainer.style.display = "none";
 }
 
 for (let i = 0; i < 12; i++) {
@@ -66,10 +69,21 @@ for (let i = 0; i < 12; i++) {
 let clickableCard = document.querySelector("#gallery");
 
 clickableCard.addEventListener("click", (e) => {
-  let cards = document.querySelectorAll(".modal-container");
+  let cards = document.querySelectorAll(".modal");
 
-  for (let i = 0; i < 12; i++)
-    if (e.target.className === "card") {
+  if (e.target.className === "card") {
+    for (let i = 0; i < 12; i++) {
+      modalContainer.style.display = "";
       cards[i].style.display = "";
     }
+  }
 });
+
+// let modalCard = document.querySelectorAll().addEventListener("click", (e) => {
+//   let cards = document.querySelectorAll(".modal-container");
+
+//   for (let i = 0; i < 12; i++)
+//     if (e.target.tagName === "BUTTON") {
+//       cards[i].style.display = "none";
+//     }
+// });
