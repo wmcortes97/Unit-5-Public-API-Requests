@@ -35,8 +35,8 @@ function getDetails(data) {
 }
 
 function modalWindow(data) {
-  let modal = document.createElement("div");
-  modal.className = ".modal";
+  //let modal = document.createElement("div");
+  //modal.className = ".modal";
 
   html = `   <div class="modal">
   <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
@@ -52,9 +52,8 @@ function modalWindow(data) {
   </div>
 </div>`;
 
-  modal.insertAdjacentHTML("beforeend", html);
+  modalContainer.insertAdjacentHTML("beforeend", html);
 
-  modalContainer.appendChild(modal);
   body.appendChild(modalContainer);
   modalContainer.style.display = "none";
 }
