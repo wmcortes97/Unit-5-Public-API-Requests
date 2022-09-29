@@ -27,6 +27,32 @@ function getDetails(data) {
 `;
   newCard.insertAdjacentHTML("beforeend", html);
   gallery.appendChild(newCard);
+
+  modalWindow(data);
+}
+
+function modalWindow(data) {
+  let modalContainer = document.createElement("div");
+  modalContainer.className = "modal-container";
+
+  let modalWindow = document.createElement("div");
+  modalWindow.className = "modal";
+
+  html = `   <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
+  <div class="modal-info-container">
+      <img class="modal-img" src="${data.picture.large}" alt="profile picture">
+      <h3 id="name" class="modal-name cap">name</h3>
+      <p class="modal-text">email</p>
+      <p class="modal-text cap">city</p>
+      <hr>
+      <p class="modal-text">(555) 555-5555</p>
+      <p class="modal-text">123 Portland Ave., Portland, OR 97204</p>
+      <p class="modal-text">Birthday: 10/21/2015</p>
+  </div>`;
+
+  modalWindow.insertAdjacentHTML("beforeend", html);
+  modalContainer.appendChild(modalWindow);
+  //gallery.after(modalContainer);
 }
 
 for (let i = 0; i < 12; i++) {
@@ -35,3 +61,7 @@ for (let i = 0; i < 12; i++) {
     .then((data) => data.results[0])
     .then((data) => getDetails(data));
 }
+
+let clickableCard = document.querySelectorAll("card");
+
+clickableCard.addEventListener("click", (e) => {});
