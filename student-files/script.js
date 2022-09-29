@@ -8,6 +8,7 @@
 
 let profileURL = "https://randomuser.me/api/";
 let gallery = document.querySelector(".gallery");
+let body = document.querySelector("body");
 
 function getDetails(data) {
   let newCard = document.createElement("div");
@@ -28,17 +29,15 @@ function getDetails(data) {
   newCard.insertAdjacentHTML("beforeend", html);
   gallery.appendChild(newCard);
 
-  modalWindow(data);
+  //modalWindow(data);
 }
 
 function modalWindow(data) {
   let modalContainer = document.createElement("div");
   modalContainer.className = "modal-container";
 
-  let modalWindow = document.createElement("div");
-  modalWindow.className = "modal";
-
-  html = `   <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
+  html = `   <div class="modal">
+  <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
   <div class="modal-info-container">
       <img class="modal-img" src="${data.picture.large}" alt="profile picture">
       <h3 id="name" class="modal-name cap">name</h3>
@@ -48,11 +47,12 @@ function modalWindow(data) {
       <p class="modal-text">(555) 555-5555</p>
       <p class="modal-text">123 Portland Ave., Portland, OR 97204</p>
       <p class="modal-text">Birthday: 10/21/2015</p>
-  </div>`;
+  </div>
+</div>`;
 
-  modalWindow.insertAdjacentHTML("beforeend", html);
-  modalContainer.appendChild(modalWindow);
-  //gallery.after(modalContainer);
+  let card = modalContainer.insertAdjacentHTML("beforeend", html);
+  return card;
+  //body.appendChild(modalContainer);
 }
 
 for (let i = 0; i < 12; i++) {
@@ -62,6 +62,10 @@ for (let i = 0; i < 12; i++) {
     .then((data) => getDetails(data));
 }
 
-let clickableCard = document.querySelectorAll("card");
+let clickableCard = document.querySelector("#gallery");
 
-clickableCard.addEventListener("click", (e) => {});
+clickableCard.addEventListener("click", (e) => {
+  if (e.target.className === "card") {
+    body.appendChild(modalWindow(e));
+  }
+});
