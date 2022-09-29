@@ -29,7 +29,7 @@ function getDetails(data) {
   newCard.insertAdjacentHTML("beforeend", html);
   gallery.appendChild(newCard);
 
-  //modalWindow(data);
+  modalWindow(data);
 }
 
 function modalWindow(data) {
@@ -51,8 +51,9 @@ function modalWindow(data) {
 </div>`;
 
   let card = modalContainer.insertAdjacentHTML("beforeend", html);
-  return card;
-  //body.appendChild(modalContainer);
+  modalContainer.style.display = "none";
+
+  body.appendChild(modalContainer);
 }
 
 for (let i = 0; i < 12; i++) {
@@ -65,7 +66,10 @@ for (let i = 0; i < 12; i++) {
 let clickableCard = document.querySelector("#gallery");
 
 clickableCard.addEventListener("click", (e) => {
-  if (e.target.className === "card") {
-    body.appendChild(modalWindow(e));
-  }
+  let cards = document.querySelectorAll(".modal-container");
+
+  for (let i = 0; i < 12; i++)
+    if (e.target.className === "card") {
+      cards[i].style.display = "";
+    }
 });
