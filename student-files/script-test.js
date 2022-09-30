@@ -1,6 +1,21 @@
 /**
- * Setting a global data variable
- * Selecting HTML elements
+ * Search bar
+ */
+let searchContainer = document.querySelector('.search-container');
+let input = document.querySelector(".search-input");
+
+
+html = ` <form action="#" method="get">
+<input type="search" id="search-input" class="search-input" placeholder="Search...">
+<input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
+</form>`
+
+searchContainer.insertAdjacentHTML("beforeend", html);
+
+//----------------------------------------------------------------------//
+
+/**
+ * Setting a global data variable and storing fetched data in that variable
  */
 
 let profileList;
@@ -11,7 +26,9 @@ fetch("https://randomuser.me/api/?results=12&nat=us")
   .then((data) => (profileList = data))
   .then(() => getDetails(profileList))
  
-
+/**
+ * Selecting elements in global scope
+ */
 let gallery = document.querySelector(".gallery");
 let body = document.querySelector("body");
 
@@ -32,29 +49,44 @@ function getDetails(profileList) {
        <p class="card-text">${profileList[i].email}</p>
        <p class="card-text cap">${profileList[i].location.city}, ${profileList[i].location.state}</p>
    </div>
+   
  </div>
    
    `;
     gallery.insertAdjacentHTML("beforeend", html);
   }
+  /**
+   * EventListener: Clicking on card will open associated modal window, with getDetails function
+   */
   gallery.addEventListener("click", (e) => {
-
-    //let clickableCards = document.querySelectorAll(".card");
     if (e.target !== gallery) {
-     
-
       let info = e.target.closest(".card");
       info = info.children[1].children[0].textContent;
       for (let i = 0; i < profileList.length; i++) {
         if (info === `${profileList[i].name.first} ${profileList[i].name.last}` ) {
           modalPopup(profileList[i]);
+          prevModal(profileList[i - 1]);
         }
       }
     }
   });
-  
+/**
+ * EventListener: Filtering Search, still within getDetails function
+ */
+  let cards = document.querySelectorAll(".card");
+  searchContainer.addEventListener("keyup", (e) => {
+      for(let i = 0; i < profileList.length; i++) {
+        let cardName = cards[i].children[1].children[0].textContent
+        let searchQuery = e.target.value;
+      if(searchQuery === cardName ) {
+        console.log(cards[i]);
+
+      }
+    }
+  })
 }
 
+//------------------------------end of function, beginning of modalPopup() -------------------------//
 /**
  *
  * @param {array} profile
@@ -83,21 +115,27 @@ function modalPopup(profile) {
               profile.dob.date
             )}</p>
         </div>
-    </div>
+    </div> 
+    <div class="modal-btn-container">
+    <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
+    <button type="button" id="modal-next" class="modal-next btn">Next</button>
+</div>
 </div>`;
   
   body.insertAdjacentHTML("beforeend", html);
   let modalContainer = document.querySelector(".modal-container");
  
-
+/**
+ * EventListener: Clicking x will close modal window 
+ */
   let closeButton = document.querySelector('.modal-close-btn');
   closeButton.addEventListener("click", (e)=> {
    modalContainer.remove();
 })
 
- 
 }
 
+//---------------------------end of function, beginning of helper function for modalPopup()----------//
 /**
  *
  * @param {string} birthdayString
@@ -110,3 +148,5 @@ function birthdayReformatter(birthdayString) {
   birthday = `${birthday[1]}/${birthday[2]}/${birthday[0]}`;
   return birthday;
 }
+
+
