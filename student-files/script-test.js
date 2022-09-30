@@ -5,17 +5,15 @@
 
 let profileList;
 
-fetch("https://randomuser.me/api/?results=12")
+fetch("https://randomuser.me/api/?results=12&nat=us")
   .then((data) => data.json())
   .then((data) => data.results)
   .then((data) => (profileList = data))
-  .then(() => getDetails(profileList))
-  .then(() => modalPopup(profileList));
+  .then(() => getDetails(profileList));
+//.then(() => modalPopup(profileList));
 
 let gallery = document.querySelector(".gallery");
 let body = document.querySelector("body");
-// let modalContainer = document.createElement("div");
-// modalContainer.className = "modal-container";
 
 /**
  *
@@ -39,6 +37,7 @@ function getDetails(profileList) {
    `;
     gallery.insertAdjacentHTML("beforeend", html);
   }
+  modalPopup(profileList);
 }
 
 /**
@@ -56,15 +55,19 @@ function modalPopup(profileList) {
             <p class="modal-text">${profileList[i].email}</p>
             <p class="modal-text cap">${profileList[i].location.city}</p>
             <hr>
-            <p class="modal-text">(555) 555-5555</p>
-            <p class="modal-text">123 Portland Ave., Portland, OR 97204</p>
+            <p class="modal-text">${profileList[i].cell}</p>
+            <p class="modal-text">${profileList[i].location.street.number} ${profileList[i].location.street.name}, ${profileList[i].location.city}, ${profileList[i].location.state} ${profileList[i].location.postcode}</p>
             <p class="modal-text">Birthday: 10/21/2015</p>
         </div>
     </div>
 </div>`;
-  }
-  body.insertAdjacentHTML("beforeend", html);
 
+    function birthdayReformatter(birthdayString) {}
+    // let phoneParts = profileList[i].cell.split("-");
+    // let phoneNumber = `(${phoneParts[0]}) ${phoneParts[1]}-${phoneParts[2]}`;
+  }
+
+  body.insertAdjacentHTML("beforeend", html);
   let modalContainer = document.querySelector(".modal-container");
-  modalContainer.style.display = "none";
+  //modalContainer.style.display = "none";
 }
