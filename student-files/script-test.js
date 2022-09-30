@@ -65,7 +65,7 @@ function getDetails(profileList) {
       for (let i = 0; i < profileList.length; i++) {
         if (info === `${profileList[i].name.first} ${profileList[i].name.last}` ) {
           modalPopup(profileList[i]);
-          prevModal(profileList[i - 1]);
+        
         }
       }
     }
@@ -79,7 +79,7 @@ function getDetails(profileList) {
         let cardName = cards[i].children[1].children[0].textContent
         let searchQuery = e.target.value;
       if(searchQuery === cardName ) {
-        console.log(cards[i]);
+        console.log(cards[i]); //returns div card
 
       }
     }
