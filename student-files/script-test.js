@@ -50,24 +50,42 @@ function modalPopup(profileList) {
     <div class="modal">
         <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
         <div class="modal-info-container">
-            <img class="modal-img" src="${profileList[i].picture.large}" alt="profile picture">
-            <h3 id="name" class="modal-name cap">${profileList[i].name.first}</h3>
+            <img class="modal-img" src="${
+              profileList[i].picture.large
+            }" alt="profile picture">
+            <h3 id="name" class="modal-name cap">${
+              profileList[i].name.first
+            }</h3>
             <p class="modal-text">${profileList[i].email}</p>
             <p class="modal-text cap">${profileList[i].location.city}</p>
             <hr>
             <p class="modal-text">${profileList[i].cell}</p>
-            <p class="modal-text">${profileList[i].location.street.number} ${profileList[i].location.street.name}, ${profileList[i].location.city}, ${profileList[i].location.state} ${profileList[i].location.postcode}</p>
-            <p class="modal-text">Birthday: 10/21/2015</p>
+            <p class="modal-text">${profileList[i].location.street.number} ${
+      profileList[i].location.street.name
+    }, ${profileList[i].location.city}, ${profileList[i].location.state} ${
+      profileList[i].location.postcode
+    }</p>
+            <p class="modal-text">Birthday: ${birthdayReformatter(
+              profileList[i].dob.date
+            )}</p>
         </div>
     </div>
 </div>`;
-
-    function birthdayReformatter(birthdayString) {}
-    // let phoneParts = profileList[i].cell.split("-");
-    // let phoneNumber = `(${phoneParts[0]}) ${phoneParts[1]}-${phoneParts[2]}`;
   }
-
   body.insertAdjacentHTML("beforeend", html);
   let modalContainer = document.querySelector(".modal-container");
   //modalContainer.style.display = "none";
+}
+
+/**
+ *
+ * @param {string} birthdayString
+ * @returns birthday in xx/xx/xxxx format
+ */
+function birthdayReformatter(birthdayString) {
+  let birthday = birthdayString;
+  birthday = birthday.slice(0, 10);
+  birthday = birthday.split("-");
+  birthday = `${birthday[1]}/${birthday[2]}/${birthday[0]}`;
+  return birthday;
 }
