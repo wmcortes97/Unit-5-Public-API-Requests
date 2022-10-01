@@ -15,3 +15,6 @@ I had to think about the API data differently and learned that I can grab data b
 ## CSS Changes
 changed background color to body, .card, and .modal-container 
 made .card div larger when user hovers over it
+
+## Attributes
+background color gradient was gotten from this website: https://palettes.shecodes.io/palettes/1313 and https://gradients.shecodes.io/
