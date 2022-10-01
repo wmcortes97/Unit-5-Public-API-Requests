@@ -77,10 +77,15 @@ function getDetails(profileList) {
   searchContainer.addEventListener("keyup", (e) => {
       for(let i = 0; i < profileList.length; i++) {
         let cardName = cards[i].children[1].children[0].textContent
+        cardName = cardName.toLowerCase()
         let searchQuery = e.target.value;
-      if(searchQuery === cardName ) {
-        console.log(cards[i]); //returns div card
+        searchQuery = searchQuery.toLowerCase();
 
+      if(searchQuery === cardName ) {
+        cards[i].style.display = ""; 
+
+      } else {
+        cards[i].style.display = "none";
       }
     }
   })
