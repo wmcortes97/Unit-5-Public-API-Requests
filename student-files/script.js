@@ -162,6 +162,9 @@ modalPopup(profileList[listNumber]);
   }
 })
 
+/**
+ * EventListener: Clicking nextButton
+ */
 
 modalContainer.addEventListener('click', (e)=> {
   if(e.target.className === "modal-next btn") {

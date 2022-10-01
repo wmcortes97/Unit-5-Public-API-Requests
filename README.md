@@ -11,3 +11,7 @@ What did you learn while building this project? What challenges did you face and
 
 Using an API resource was very different than using a resource provided in the JS file itself. 
 I had to think about the API data differently and learned that I can grab data by jumping from function to function. 
+
+## CSS Changes
+changed background color to body, .card, and .modal-container 
+made .card div larger when user hovers over it
