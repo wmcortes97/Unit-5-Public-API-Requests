@@ -74,26 +74,22 @@ function getDetails(profileList) {
  * EventListener: Filtering Search, still within getDetails function
  */
   let cards = document.querySelectorAll(".card");
-  searchContainer.addEventListener("keyup", (e) => {
 
-          let searchQuery = e.target.value;
+  searchContainer.addEventListener("keyup", (e) => {
+    let searchQuery = e.target.value;
         searchQuery = searchQuery.toLowerCase();
 
       for(let i = 0; i < cards.length; i++) {
         let card = cards[i].children[1];
         txtValue = card.textContent || card.innerText;
 
-        if(txtValue.toLowerCase().indexOf(searchQuery) > -1)
-        {
+        if(txtValue.toLowerCase().indexOf(searchQuery) > -1){
               cards[i].style.display = ""; 
-      
             } else {
               cards[i].style.display = "none";
-            }
-        
- 
-  }
-  })
+          }
+      }
+ })
 }
 
 //------------------------------end of function, beginning of modalPopup() -------------------------//
@@ -139,8 +135,41 @@ function modalPopup(profile) {
  * EventListener: Clicking x will close modal window 
  */
   let closeButton = document.querySelector('.modal-close-btn');
+
   closeButton.addEventListener("click", (e)=> {
    modalContainer.remove();
+})
+
+/**
+ * EventListener: Clicking prevButton
+ */
+  
+modalContainer.addEventListener('click', (e)=> {
+  if(e.target.className === "modal-prev btn") {
+    modalContainer.remove();
+
+let modalName = e.target.closest(".modal-container").children[0].children[1].children[1].textContent;
+
+for (let i = 0; i < profileList.length; i++) {
+  if (modalName === `${profileList[i].name.first} ${profileList[i].name.last}`) {
+modalPopup(profileList[i - 1]);
+  }
+}
+
+    
+    
+    // if (e.target !== gallery) {
+    //   let info = e.target.closest(".card");
+    //   info = info.children[1].children[0].textContent;
+    //   for (let i = 0; i < profileList.length; i++) {
+    //     if (info === `${profileList[i].name.first} ${profileList[i].name.last}` ) {
+    //       modalPopup(profileList[i]);
+        
+    //     }
+    //   }
+    // }
+    
+  }
 })
 
 }
