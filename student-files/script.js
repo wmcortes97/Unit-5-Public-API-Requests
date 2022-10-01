@@ -152,7 +152,10 @@ let modalName = e.target.closest(".modal-container").children[0].children[1].chi
 
 for (let i = 0; i < profileList.length; i++) {
   if (modalName === `${profileList[i].name.first} ${profileList[i].name.last}`) {
-modalPopup(profileList[i - 1]);
+    let listNumber = i -1;
+    if (listNumber >= 0) {
+modalPopup(profileList[listNumber]);
+    }
   }
 }
 
@@ -168,7 +171,10 @@ let modalName = e.target.closest(".modal-container").children[0].children[1].chi
 
 for (let i = 0; i < profileList.length; i++) {
   if (modalName === `${profileList[i].name.first} ${profileList[i].name.last}`) {
-modalPopup(profileList[i + 1]);
+    let listNumber = i + 1;
+    if (listNumber < 12) {
+modalPopup(profileList[listNumber]);
+    }
   }
 }
 
