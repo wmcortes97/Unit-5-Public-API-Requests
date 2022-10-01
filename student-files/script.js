@@ -75,29 +75,23 @@ function getDetails(profileList) {
  */
   let cards = document.querySelectorAll(".card");
   searchContainer.addEventListener("keyup", (e) => {
-      for(let i = 0; i < profileList.length; i++) {
-        let cardName = cards[i].children[1].children[0].textContent
-        cardName = cardName.toLowerCase();
-        //cardName = cardName.split("");
 
-
-        let searchQuery = e.target.value;
+          let searchQuery = e.target.value;
         searchQuery = searchQuery.toLowerCase();
-       //searchQuery = searchQuery.split("");
 
-  
-      if( searchQuery === cardName ) {
-        cards[i].style.display = ""; 
+      for(let i = 0; i < cards.length; i++) {
+        let card = cards[i].children[1];
+        txtValue = card.textContent || card.innerText;
 
-      } else {
-        cards[i].style.display = "none";
-      }
-
-      if(searchQuery === "") {
-        cards[i].style.display ="";
+        if(txtValue.toLowerCase().indexOf(searchQuery) > -1)
+        {
+              cards[i].style.display = ""; 
       
-      
-    }
+            } else {
+              cards[i].style.display = "none";
+            }
+        
+ 
   }
   })
 }
