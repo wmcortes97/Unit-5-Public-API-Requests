@@ -77,17 +77,28 @@ function getDetails(profileList) {
   searchContainer.addEventListener("keyup", (e) => {
       for(let i = 0; i < profileList.length; i++) {
         let cardName = cards[i].children[1].children[0].textContent
-        cardName = cardName.toLowerCase()
+        cardName = cardName.toLowerCase();
+        //cardName = cardName.split("");
+
+
         let searchQuery = e.target.value;
         searchQuery = searchQuery.toLowerCase();
+       //searchQuery = searchQuery.split("");
 
-      if(searchQuery === cardName ) {
+  
+      if( searchQuery === cardName ) {
         cards[i].style.display = ""; 
 
       } else {
         cards[i].style.display = "none";
       }
+
+      if(searchQuery === "") {
+        cards[i].style.display ="";
+      
+      
     }
+  }
   })
 }
 
