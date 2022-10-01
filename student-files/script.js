@@ -156,19 +156,22 @@ modalPopup(profileList[i - 1]);
   }
 }
 
-    
-    
-    // if (e.target !== gallery) {
-    //   let info = e.target.closest(".card");
-    //   info = info.children[1].children[0].textContent;
-    //   for (let i = 0; i < profileList.length; i++) {
-    //     if (info === `${profileList[i].name.first} ${profileList[i].name.last}` ) {
-    //       modalPopup(profileList[i]);
-        
-    //     }
-    //   }
-    // }
-    
+  }
+})
+
+
+modalContainer.addEventListener('click', (e)=> {
+  if(e.target.className === "modal-next btn") {
+    modalContainer.remove();
+
+let modalName = e.target.closest(".modal-container").children[0].children[1].children[1].textContent;
+
+for (let i = 0; i < profileList.length; i++) {
+  if (modalName === `${profileList[i].name.first} ${profileList[i].name.last}`) {
+modalPopup(profileList[i + 1]);
+  }
+}
+
   }
 })
 
